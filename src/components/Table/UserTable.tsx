@@ -113,7 +113,7 @@ export default function UsersTable<T extends object>({ users, columns, onSearch,
 
       {/* Table */}
       {isFetching ? <FullScreenLoader /> : <>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto rounded shadow-lg">
           {isEmptyUser ? (<div className="py-4 text-center text-gray-500">No users found</div>) :
             (
               <table className="min-w-full border border-gray-200 divide-y divide-gray-200 rounded">
