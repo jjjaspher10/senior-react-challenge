@@ -8,7 +8,7 @@ import FullScreenLoader from "../Loader/FullscreenLoader";
 export interface Column<T> {
   key: keyof T;
   label: string;
-  cellValue?: (value: T[keyof T], row: T) => React.ReactNode;
+  cellValue?: (row: T) => React.ReactNode;
   isVisible?: boolean;
 }
 
@@ -34,7 +34,6 @@ export default function UsersTable<T extends object>({ users, columns, onSearch,
   };
 
   const applyColumns = () => {
-    console.log('tempVisibleColumns', tempVisibleColumns);
     setVisibleColumns(tempVisibleColumns);
     setShowModal(false);
   };
@@ -147,7 +146,7 @@ export default function UsersTable<T extends object>({ users, columns, onSearch,
                         const value = user[col.key];
                         return (
                           <td key={col.key.toString()} className="px-4 py-2 text-gray-700 truncate">
-                            {col.cellValue ? col.cellValue(value, user) : value as React.ReactNode ?? "-"}
+                            {col.cellValue ? col.cellValue(user) : value as React.ReactNode ?? "-"}
                           </td>
                         );
                       })}
@@ -223,7 +222,7 @@ export default function UsersTable<T extends object>({ users, columns, onSearch,
               <p><strong>Name:</strong> {selectedUser.firstName} {selectedUser.lastName}</p>
               <p><strong>Email:</strong> {selectedUser.email}</p>
               <p><strong>Phone:</strong> {selectedUser.phone}</p>
-              <p><strong>Gender:</strong> {selectedUser.gender}</p>
+              <p><strong>Gender:</strong> {selectedUser.gender[0]?.toUpperCase() + selectedUser.gender.slice(1).toLowerCase()}</p>
               <p><strong>Age:</strong> {selectedUser.age}</p>
               {selectedUser.company && (
                 <p><strong>Company:</strong> {selectedUser.company.name} ({selectedUser.company.title})</p>

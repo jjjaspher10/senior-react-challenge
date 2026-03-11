@@ -20,12 +20,18 @@ export default function UsersAdminPage() {
     { key: "lastName", label: "Last Name", isVisible: true },
     { key: "email", label: "Email", isVisible: true },
     { key: "phone", label: "Phone", isVisible: true },
-    { key: "gender", label: "Gender", isVisible: true },
+    { key: "gender", label: "Gender",
+      cellValue: (row: User) => (
+        <span>
+          {row.gender[0]?.toUpperCase() + row.gender.slice(1).toLowerCase()}
+        </span>
+      ),
+       isVisible: true },
     { key: "age", label: "Age", isVisible: true },
     {
       key: "company",
       label: "Company",
-      cellValue: (_value, row: User) => (
+      cellValue: (row: User) => (
         <span className="font-semibold">
           {row.company?.name} ({row.company?.title})
         </span>
@@ -35,7 +41,7 @@ export default function UsersAdminPage() {
     {
       key: "address",
       label: "Address",
-      cellValue: (_value, row: User) => <em>{row.address?.city}</em>,
+      cellValue: (row: User) => <em>{row.address?.city}</em>,
       isVisible: false,
     },
   ];

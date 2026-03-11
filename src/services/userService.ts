@@ -7,7 +7,6 @@ export const getUsers = async (page: number, limit: number): Promise<UsersRespon
   const skip = (page - 1) * limit;
   const response = await fetch(`${DUMMY_JASON_SERVER}/users?limit=${limit}&skip=${skip}`);
   const jsonResponse = await response.json();
-  console.log(jsonResponse);
   return jsonResponse;
 };
 
@@ -15,6 +14,5 @@ export const searchUser = async (page: number, limit: number, query: string): Pr
   const skip = (page - 1) * limit;
   const response = await fetch(`${DUMMY_JASON_SERVER}/users/search?q=${query}&limit=${limit}&skip=${skip}`);
   const jsonResponse = await response.json();
-  console.log(jsonResponse);
   return jsonResponse;
 }
