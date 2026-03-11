@@ -6,10 +6,10 @@ import { User } from "@/app/types/user";
 import FullScreenLoader from "../Loader/FullscreenLoader";
 
 export interface Column<T> {
-  key: keyof T | string;
+  key: keyof T;
   label: string;
-  cellValue?: (value: T[keyof T] | any, row: T) => React.ReactNode;
-  isVisible: boolean;
+  cellValue?: (value: T[keyof T], row: T) => React.ReactNode;
+  isVisible?: boolean;
 }
 
 interface UsersTableProps<T> {
@@ -27,7 +27,7 @@ export default function UsersTable<T extends object>({ users, columns, onSearch,
   const [genderFilter, setGenderFilter] = useState<"all" | "male" | "female">("all");
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
-  const toggleColumn = (key: keyof T | string) => {
+  const toggleColumn = (key: keyof T) => {
     setTempVisibleColumns(prev =>
       prev.includes(key) ? prev.filter(k => k !== key) : [...prev, key]
     );
@@ -144,10 +144,10 @@ export default function UsersTable<T extends object>({ users, columns, onSearch,
                         }
                       }}>
                       {activeColumns.map(col => {
-                        const value = (user as any)[col.key];
+                        const value = user[col.key];
                         return (
                           <td key={col.key.toString()} className="px-4 py-2 text-gray-700 truncate">
-                            {col.cellValue ? col.cellValue(value, user) : value ?? "-"}
+                            {col.cellValue ? col.cellValue(value, user) : value as React.ReactNode ?? "-"}
                           </td>
                         );
                       })}

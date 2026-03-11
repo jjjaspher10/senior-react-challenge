@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { userUsers } from "../hooks/useUsers";
-import UsersTable from "@/components/Table/UserTable";
+import UsersTable, { Column } from "@/components/Table/UserTable";
 import { User } from "../types/user";
 import Pagination from "@/components/Pagination/Pagination";
 import useDebounce from "../hooks/useDebounce";
@@ -15,7 +15,7 @@ export default function UsersAdminPage() {
 
   const { data, isError, refetch, isFetching } = userUsers(page, limit, debouncedSearch);
 
-  const columns = [
+  const columns: Column<User>[]  = [
     { key: "firstName", label: "First Name", isVisible: true },
     { key: "lastName", label: "Last Name", isVisible: true },
     { key: "email", label: "Email", isVisible: true },
@@ -25,7 +25,7 @@ export default function UsersAdminPage() {
     {
       key: "company",
       label: "Company",
-      cellValue: (_value: any, row: User) => (
+      cellValue: (_value, row: User) => (
         <span className="font-semibold">
           {row.company?.name} ({row.company?.title})
         </span>
@@ -35,7 +35,7 @@ export default function UsersAdminPage() {
     {
       key: "address",
       label: "Address",
-      cellValue: (_value: any, row: User) => <em>{row.address?.city}</em>,
+      cellValue: (_value, row: User) => <em>{row.address?.city}</em>,
       isVisible: false,
     },
   ];
