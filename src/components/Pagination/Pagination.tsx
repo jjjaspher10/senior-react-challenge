@@ -51,7 +51,7 @@ export default function Pagination({
       </p>
 
       {/* Pagination */}
-      <div className="flex items-center border border-gray-400 hover:cursor-pointer rounded overflow-hidden rounded shadow-lg">
+      <div className="flex items-center border border-gray-400 hover:cursor-pointer rounded rounded shadow-lg">
         {/* Prev */}
         <button
           disabled={page === 1}

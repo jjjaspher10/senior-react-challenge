@@ -53,7 +53,7 @@ export default function UsersTable<T extends object>({ users, columns, onSearch,
   return (
     <div className="cmp-user-table__container">
 
-      <div className="cmp-user-table__tools flex justify-end">
+      <div className="cmp-user-table__tools flex justify-end mb-2">
         {/* Table Search */}
         <div className="cmp-user-table__search mr-2">
           <input
@@ -99,14 +99,14 @@ export default function UsersTable<T extends object>({ users, columns, onSearch,
             FEMALE
           </button>
         </div>
-        <div className="cmp-user-table__column-selector">
+        <div className="cmp-user-table__column-selector flex items-center justify-center">
           {/* Column selector button */}
           <button
-            className="mb-4 px-4 py-2 bg-white text-black rounded hover:bg-gray-200 hover:cursor-pointer"
+            className="mb-4 px-0 py-0 sm:px-4 sm:py-2 bg-white text-black rounded hover:bg-gray-200 hover:cursor-pointer"
             onClick={() => setShowModal(true)}
             title="Set visible column"
           >
-            | | |
+            <img src="/gear.svg" alt="Settings" className="w-5 h-5" style={{ width: "20px", height: "20px" }}/>
           </button>
         </div>
       </div>
