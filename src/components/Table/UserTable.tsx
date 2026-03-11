@@ -134,7 +134,7 @@ export default function UsersTable<T extends object>({ users, columns, onSearch,
                     <tr 
                       key={idx} 
                       tabIndex={0}
-                      className="hover:bg-gray-50 hover:cursor-pointer focus:outline-none focus:bg-gray-100"
+                      className="hover:bg-gray-50 hover:cursor-pointer focus:border-2 focus:border-gray-400 focus:bg-gray-100"
                       role="button"
                       aria-label={`View details for ${(user as User).firstName} ${(user as User).lastName}`}
                       onClick={() => setSelectedUser(user as User)}
