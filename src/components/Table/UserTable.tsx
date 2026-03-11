@@ -63,7 +63,7 @@ export default function UsersTable<T extends object>({ users, columns, onSearch,
             onChange={(e) => {
               onSearch(e.target.value);
             }}
-            className="w-full max-w-sm px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full max-w-sm px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
           />
         </div>
         {/* Gender Filter */}
