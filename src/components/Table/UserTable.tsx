@@ -104,8 +104,9 @@ export default function UsersTable<T extends object>({ users, columns, onSearch,
           <button
             className="mb-4 px-4 py-2 bg-white text-black rounded hover:bg-gray-200 hover:cursor-pointer"
             onClick={() => setShowModal(true)}
+            title="Set visible column"
           >
-            COL
+            | | |
           </button>
         </div>
       </div>
@@ -132,8 +133,16 @@ export default function UsersTable<T extends object>({ users, columns, onSearch,
                   {filteredUsers.map((user, idx) => (
                     <tr 
                       key={idx} 
-                      className="hover:bg-gray-50 hover:cursor-pointer"
-                      onClick={() => setSelectedUser(user as User)}>
+                      tabIndex={0}
+                      className="hover:bg-gray-50 hover:cursor-pointer focus:outline-none focus:bg-gray-100"
+                      role="button"
+                      aria-label={`View details for ${(user as User).firstName} ${(user as User).lastName}`}
+                      onClick={() => setSelectedUser(user as User)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          setSelectedUser(user as User);
+                        }
+                      }}>
                       {activeColumns.map(col => {
                         const value = (user as any)[col.key];
                         return (
@@ -156,7 +165,7 @@ export default function UsersTable<T extends object>({ users, columns, onSearch,
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-80 shadow-lg">
             <h2 className="text-lg font-bold mb-4">Select Columns</h2>
-            <div className="flex flex-col gap-2 max-h-64 overflow-y-auto">
+            <div className="flex flex-col gap-2 max-h-64 overflow-y-aut ml-1">
               {columns.map(col => (
                 <label key={col.key.toString()} className="flex items-center gap-2">
                   <input
